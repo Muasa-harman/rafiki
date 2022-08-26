@@ -1,3 +1,5 @@
+# If you change this, Please update the Postman collection at 
+# https://www.postman.com/interledger/workspace/interledger/folder/22855701-06d1141c-84ef-4d32-947f-fe2a1f84315b?ctx=documentation
 self:
   graphqlUrl: http://backend:3001/graphql
   hostname: 'backend'
