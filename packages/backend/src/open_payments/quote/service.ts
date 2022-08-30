@@ -184,6 +184,7 @@ export async function resolveDestination(
 ): Promise<Pay.ResolvedPayment> {
   let destination: Pay.ResolvedPayment
   try {
+    // Query Open Payments
     destination = await Pay.setupPayment({
       plugin,
       destinationPayment: options.receiver
