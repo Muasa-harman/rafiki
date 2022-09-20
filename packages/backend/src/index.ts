@@ -65,23 +65,9 @@ export function initIocContainer(
     const config = await deps.use('config')
     logger.info({ msg: 'creating knex' })
     const db = knex({
-      client: 'postgresql',
-      connection: config.databaseUrl,
-      pool: {
-        min: 2,
-        max: 10
-      },
-      migrations: {
-        directory: './',
-        tableName: 'knex_migrations'
-      }
+      client: 'cockroachdb',
+      connection: config.databaseUrl
     })
-    // node pg defaults to returning bigint as string. This ensures it parses to bigint
-    db.client.driver.types.setTypeParser(
-      db.client.driver.types.builtins.INT8,
-      'text',
-      BigInt
-    )
     return db
   })
   container.singleton('closeEmitter', async () => new EventEmitter())

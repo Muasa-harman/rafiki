@@ -1,15 +1,15 @@
-CREATE USER backend WITH PASSWORD 'backend';
+CREATE USER backend;
 CREATE DATABASE backend;
-GRANT ALL ON DATABASE backend TO backend;
+GRANT ALL ON DATABASE backend TO backend WITH GRANT OPTION;
 
-CREATE USER auth WITH PASSWORD 'auth';
+CREATE USER auth;
 CREATE DATABASE auth;
-GRANT ALL ON DATABASE auth TO auth;
+GRANT ALL ON DATABASE auth TO auth WITH GRANT OPTION;
 
-CREATE USER peerbackend WITH PASSWORD 'peerbackend';
+CREATE USER peerbackend;
 CREATE DATABASE peerbackend;
-GRANT ALL ON DATABASE peerbackend TO peerbackend;
+GRANT ALL ON DATABASE peerbackend TO peerbackend WITH GRANT OPTION;
 
-CREATE USER peerauth WITH PASSWORD 'peerauth';
+CREATE USER peerauth;
 CREATE DATABASE peerauth;
-GRANT ALL ON DATABASE peerauth TO peerauth;
+GRANT ALL ON DATABASE peerauth TO peerauth WITH GRANT OPTION;

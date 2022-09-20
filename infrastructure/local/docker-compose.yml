@@ -48,7 +48,7 @@ services:
       ADMIN_PORT: 3001
       CONNECTOR_PORT: 3002
       OPEN_PAYMENTS_PORT: 80
-      DATABASE_URL: postgresql://backend:backend@database/backend
+      DATABASE_URL: postgresql://backend@database:26257/backend?sslmode=disable
       TIGERBEETLE_CLUSTER_ID: 0
       # Tigerbeetle will support DNS in future
       TIGERBEETLE_REPLICA_ADDRESSES: '["10.5.0.50:4342"]'
@@ -71,18 +71,17 @@ services:
       - database
       - redis
   database:
-    image: 'postgres' # use latest official postgres version
+    image: 'cockroachdb/cockroach' # use latest official postgres version
     restart: unless-stopped
     networks:
       rafiki:
+    command: start-single-node --insecure 
     volumes:
-      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - database-data:/cockroach/cockroach-data
       - ./dbinit.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres
+      - '26257:26257'	
+      - '8080:8080'
   tigerbeetle:
     image: ghcr.io/coilhq/tigerbeetle@sha256:c312832a460e7374bcbd4bd4a5ae79b8762f73df6363c9c8106c76d864e21303
     restart: unless-stopped
