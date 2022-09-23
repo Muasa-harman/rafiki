@@ -66,6 +66,7 @@
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.18.0",
     "graphql-tools": "^8.3.3",
+    "http-message-signatures": "link:../../../rafiki-auth1/http-message-signatures",
     "ilp-packet": "3.1.4-alpha.1",
     "ilp-protocol-ccp": "^1.2.2",
     "ilp-protocol-ildcp": "^2.2.2",
@@ -85,6 +86,7 @@
     "pino": "^8.4.2",
     "pino-pretty": "^9.0.1",
     "raw-body": "^2.4.1",
+    "structured-headers": "link:../../../rafiki-auth1/structured-headers",
     "tigerbeetle-node": "^0.10.0",
     "uuid": "^8.3.2"
   }
