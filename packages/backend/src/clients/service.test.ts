@@ -98,4 +98,24 @@ describe('Client Key Service', (): void => {
       await expect(client.keys).toHaveLength(1)
     })
   })
+  describe('Get client key set', (): void => {
+    test('Can get client key set', async (): Promise<void> => {
+      const client = await clientService.createClient(TEST_CLIENT)
+      const keyOption = {
+        id: uuid(),
+        clientId: client.id,
+        jwk: {
+          ...TEST_CLIENT_KEY,
+          client: {
+            id: client.id,
+            ...TEST_CLIENT
+          }
+        }
+      }
+
+      await clientService.addKeyToClient(keyOption)
+      const keySet = await clientService.getClientJwks(client.id)
+      console.log(keySet)
+    })
+  })
 })

@@ -72,5 +72,19 @@ describe('Payment Pointer Routes', (): void => {
         authServer: 'https://auth.wallet.example/authorize'
       })
     })
+
+    test('returns key set for a payment pointer', async (): Promise<void> => {
+      const paymentPointer = await createPaymentPointer(deps, {
+        publicName: faker.name.firstName()
+      })
+
+      const ctx = createContext<PaymentPointerContext>({
+        headers: { Accept: 'application/json' },
+        url: '/'
+      })
+      ctx.paymentPointer = paymentPointer
+
+      await expect(paymentPointerRoutes.getJwks(ctx)).resolves.toBeUndefined()
+    })
   })
 })

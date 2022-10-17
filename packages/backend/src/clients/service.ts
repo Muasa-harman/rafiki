@@ -18,6 +18,7 @@ export interface AddKeyToClientOptions {
 
 export interface ClientService {
   getClient(id: string): Promise<Client | undefined>
+  getClientJwks(clientId: string): Promise<JWKWithRequired[]>
   createClient(options: CreateClientOptions): Promise<Client>
   addKeyToClient(options: AddKeyToClientOptions): Promise<Client>
 }
@@ -39,6 +40,7 @@ export async function createClientService({
   }
   return {
     getClient: (id) => getClient(deps, id),
+    getClientJwks: (clientId) => getClientJwks(deps, clientId),
     createClient: (options) => createClient(deps, options),
     addKeyToClient: (options) => addKeyToClient(deps, options)
   }
@@ -51,6 +53,14 @@ async function getClient(
   const client = await Client.query(deps.knex).findById(id)
   client.keys = await getClientKeys(deps, client.id)
   return client
+}
+
+async function getClientJwks(
+  deps: ServiceDependencies,
+  clientId: string
+): Promise<JWKWithRequired[]> {
+  const keys = await getClientKeys(deps, clientId)
+  return keys.map((key) => key.jwk)
 }
 
 async function getClientKeys(

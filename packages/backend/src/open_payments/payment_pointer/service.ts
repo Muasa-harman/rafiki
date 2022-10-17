@@ -10,6 +10,7 @@ import {
 import { BaseService } from '../../shared/baseService'
 import { AccountingService } from '../../accounting/service'
 import { AssetService, AssetOptions } from '../../asset/service'
+import { JWKWithRequired } from 'auth'
 
 export interface CreateOptions {
   url: string
@@ -20,6 +21,7 @@ export interface CreateOptions {
 export interface PaymentPointerService {
   create(options: CreateOptions): Promise<PaymentPointer | PaymentPointerError>
   get(id: string): Promise<PaymentPointer | undefined>
+  getPaymentPointerKeySet(id: string): Promise<JWKWithRequired[]>
   getByUrl(url: string): Promise<PaymentPointer | undefined>
   processNext(): Promise<string | undefined>
   triggerEvents(limit: number): Promise<number>
@@ -50,6 +52,7 @@ export async function createPaymentPointerService({
     create: (options) => createPaymentPointer(deps, options),
     get: (id) => getPaymentPointer(deps, id),
     getByUrl: (url) => getPaymentPointerByUrl(deps, url),
+    getPaymentPointerKeySet: (id) => getPaymentPointerKeySet(deps, id),
     processNext: () => processNextPaymentPointer(deps),
     triggerEvents: (limit) => triggerPaymentPointerEvents(deps, limit)
   }
@@ -164,6 +167,13 @@ async function processNextPaymentPointers(
 
     return paymentPointers
   })
+}
+
+async function getPaymentPointerKeySet(
+  deps: ServiceDependencies,
+  id: string
+): Promise<JWKWithRequired[]> {
+
 }
 
 // "paymentPointer" must have been fetched with the "deps.knex" transaction.
