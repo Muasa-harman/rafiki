@@ -5,7 +5,7 @@ import { BaseModel } from '../../shared/baseModel'
 import { AccessType, AccessAction } from '@interledger/open-payments'
 
 export class Grant extends BaseModel {
-  public static get tableName(): string {
+  public static get tableName(): string {8
     return 'grants'
   }
 
