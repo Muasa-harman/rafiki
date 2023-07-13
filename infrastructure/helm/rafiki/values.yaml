@@ -1,4 +1,4 @@
-rafiki-backend:
+scripay-backend:
   nodeEnv: development
   logLevel: debug
   serviceUrls:
@@ -19,9 +19,9 @@ rafiki-backend:
   postgresql:
     host: "rafiki-postgresql"
     port: 5432
-    username: "backend"
-    database: "backend"
-    password: "changeme"
+    username: "donf"
+    database: "admin"
+    password: "huduma0721456992"
   port:
     admin: 3001
     connector: 3002
@@ -53,9 +53,9 @@ rafiki-auth:
   postgresql:
     host: "rafiki-postgresql"
     port: 5432
-    username: "auth"
-    database: "auth"
-    password: "changeme"
+    username: "donf"
+    database: "admin"
+    password: "huduma0721456992"
   port:
     admin: 3003
     auth: 3006
@@ -89,10 +89,10 @@ postgresql:
     initdb:
       scripts:
         initialize_backend.sql: |
-          CREATE USER backend PASSWORD 'changeme';
+          CREATE USER backend PASSWORD 'huduma0721456992';
           CREATE DATABASE backend OWNER backend;
         initialize_auth.sql: |
-          CREATE USER auth PASSWORD 'changeme';
+          CREATE USER auth PASSWORD 'huduma0721456992';
           CREATE DATABASE auth OWNER auth;
     persistence:
       enabled: true
